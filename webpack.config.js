@@ -1,11 +1,13 @@
 const path = require('path')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
     entry: './app/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'index_bundle.js'
+        filename: 'index_bundle.js',
+        publicPath: '/'
     },
     module: {
         rules: [
@@ -13,10 +15,16 @@ module.exports = {
             { test: /\.(css)$/, use: ['style-loader', 'css-loader']}
         ]
     },
-    mode: 'development',
+    mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
     plugins: [
         new HTMLWebpackPlugin({
             template: 'app/index.html'
-        })
-    ]
+        }),
+        new CopyPlugin([
+            { from : '_redirects' }
+        ])
+    ],
+    devServer: {
+        historyApiFallback: true
+    }
 } 
