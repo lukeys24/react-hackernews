@@ -18,16 +18,14 @@ class App extends React.Component {
                         <Route 
                             exact
                             path="/"
-                        >
-                            <Posts/>
-                        </Route>
+                            component={Posts}
+                        />
 
                         <Route 
                             exact
                             path="/new"
-                        >
-                            <New/>
-                        </Route>
+                            component={New}
+                        />
                     </Switch>
                 </div>
             </Router>

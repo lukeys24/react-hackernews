@@ -33,3 +33,12 @@ li {
     font-size: 18px;
     font-weight: bold;
 }
+
+.post-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-list li {
+    margin: 10px auto;
+}
