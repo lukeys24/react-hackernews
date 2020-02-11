@@ -7,8 +7,6 @@ export default function PostList({ posts }) {
     return (
         <ul>
             {posts.map((post) => {
-                console.log(post);
-
                 return (
                     <Post
                         key={post.id}
@@ -17,9 +15,7 @@ export default function PostList({ posts }) {
                         title={post.title}
                         user={post.by}
                         comments={post.descendants}
-                    >
-
-                    </Post>
+                    />
                 )
             })}
         </ul>

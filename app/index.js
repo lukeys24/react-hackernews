@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import './index.css'
 import Nav from './components/Nav'
 import Posts from './components/Posts'
-import New from './components/New'
 
 class App extends React.Component {
 
