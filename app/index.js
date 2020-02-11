@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import './index.css'
 import Nav from './components/Nav'
 import Posts from './components/Posts'
+import User from './components/User'
 
 class App extends React.Component {
 
@@ -21,10 +22,10 @@ class App extends React.Component {
                         />
 
                         <Route 
-                            exact
                             path="/new"
                             render={() => <Posts type="new"/>}
                         />
+                        <Route path="/user" component={User}/>
                     </Switch>
                 </div>
             </Router>

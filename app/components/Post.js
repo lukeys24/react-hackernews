@@ -9,7 +9,7 @@ export default function Post({ link, time, title, user, comments }) {
                 {title}
             </a>
             <div className="info">
-                <span>by <Link to="/" className="info-link">{user}</Link></span>
+                <span>by <Link to={{pathname: "/user", search: `?id=${user}`}} className="info-link">{user}</Link></span>
                 <span>on {time}</span>
                 <span>with <Link to="/" className="info-link">{comments}</Link> comments</span>
             </div>

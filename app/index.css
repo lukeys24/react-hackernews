@@ -11,7 +11,11 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 50px;
+}
+
+ul {
+    padding: 0px;
 }
 
 li {
@@ -22,6 +26,7 @@ li {
 .row {
     display: flex;
     flex-direction: row;
+    padding: 0px;
 }
 
 .row li {
@@ -52,7 +57,7 @@ li {
 }
 
 .post {
-    margin: 10px auto;
+    margin: 15px auto;
 }
 
 span {
@@ -65,4 +70,8 @@ span {
 
 .info span {
     color: gray;
+}
+
+.name-title { 
+    margin-bottom: 0px;
 }

@@ -51,5 +51,5 @@ export function fetchUser (id) {
 
 export function fetchPosts (ids) {
   return Promise.all(ids.map(fetchItem))
-    .then((posts) => removeDeleted(onlyPosts(removeDead(posts))))
+    .then((posts) => removeNoUrl(removeDeleted(onlyPosts(removeDead(posts)))))
 }
