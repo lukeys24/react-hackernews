@@ -2,7 +2,7 @@ import React from 'react'
 import queryString from 'query-string' ;
 import Loading from './Loading'
 import { fetchUser, fetchPosts } from '../utils/api'
-import Post from './Post';
+import { formatDate } from '../utils//helper'
 import PostList from './PostList';
 
 export default class User extends React.Component {
@@ -61,8 +61,8 @@ export default class User extends React.Component {
                         <React.Fragment>
                             <h1 className="name-title">{user.id}</h1>
                             <div className="info">
-                                <span>joined {user.created}</span>
-                                <span>has {user.karma}</span>
+                                <span>joined <b>{formatDate(user.created)}</b></span>
+                                <span>has <b>{user.karma.toLocaleString()}</b></span>
                             </div>
                             <p dangerouslySetInnerHTML={{__html : user.about}}></p>
                         </React.Fragment>
