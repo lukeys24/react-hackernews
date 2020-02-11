@@ -12,7 +12,7 @@ export default class Post extends React.Component {
         this.state =  {
             post : null,
             loadingPost : true,
-            comments: null,
+            comments: [],
             loadingComments: true,
             error : null
         }
@@ -24,8 +24,12 @@ export default class Post extends React.Component {
         fetchItem(id)
             .then((post) => {
                 this.setState({ post, loadingPost: false })
-                
-                return fetchComments(post.kids)
+
+                if (post.hasOwnProperty('kids')) {
+                    return fetchComments(post.kids)
+                }
+
+                return []
             })
             .then((comments) => {
                 this.setState({ comments, loadingComments : false })
@@ -34,7 +38,6 @@ export default class Post extends React.Component {
 
     render() {
         const { error, comments ,loadingComments ,loadingPost, post } = this.state
-
         if (error) {
             return <p>{error}</p>
         }
