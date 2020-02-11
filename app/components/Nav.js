@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 const activeStyle = {
-    color: "rgb(218, 13, 13)"
+    color: "rgb(187, 46, 31)"
 }
 
 export default function Nav() {

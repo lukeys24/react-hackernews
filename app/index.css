@@ -16,6 +16,7 @@ body {
 
 li {
     list-style-type: none;
+    margin: 20px 0;
 }
 
 .row {
@@ -25,6 +26,13 @@ li {
 
 .row li {
     margin-right: 10px
+}
+
+.link {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(187, 46, 31);
 }
 
 .nav-link {
@@ -41,4 +49,26 @@ li {
 
 .post-list li {
     margin: 10px auto;
+}
+
+.post {
+    margin: 10px auto;
+}
+
+span {
+    margin-right: 5px;
+}
+
+.info-link {
+    color: black;
+}
+
+.info span {
+    color: gray;
+}
+
+.loading {
+    font-weight: bold;
+    font-size: 28px;
+    text-align: center;
 }

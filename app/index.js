@@ -18,13 +18,13 @@ class App extends React.Component {
                         <Route 
                             exact
                             path="/"
-                            component={Posts}
+                            render={() => <Posts type="top"/>}
                         />
 
                         <Route 
                             exact
                             path="/new"
-                            component={New}
+                            render={() => <Posts type="new"/>}
                         />
                     </Switch>
                 </div>

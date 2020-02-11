@@ -1,37 +1,67 @@
 import React from 'react'
-import Post from './Post'
-
-function PostList() {
-    return (
-        <div className="post-container">
-            <ul className="post-list">
-                <li>
-                    <Post/>
-                </li>
-                <li>
-                    <Post/>
-                </li>
-                <li>
-                    <Post/>
-                </li>
-                <li>
-                    <Post/>
-                </li>
-            </ul>
-        </div>
-    )
-}
+import PostList from './PostList'
+import { getPosts } from '../utils/api'
 
 export default class Posts extends React.Component {
     constructor(props) {
         super(props)
+
+        this.state = {
+            posts : null,
+            error: null,
+            isLoading: true
+        }
+        
+        this.fetchPosts = this.fetchPosts.bind(this);
     }
 
+    componentDidMount() {
+        this.fetchPosts();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.type !== this.props.type) {
+          this.fetchPosts()
+        }
+      }
+
+    fetchPosts() {
+        this.setState({ 
+            posts: null,
+            error: null,
+            isLoading: true
+        })
+
+        getPosts(this.props.type)
+            .then((posts) => 
+                this.setState({
+                    posts,
+                    error: null,
+                    isLoading: false
+                })
+            )
+            .catch(({ error }) => 
+                this.setState({
+                    posts: null,
+                    error, 
+                    isLoading: false
+                })
+            ); 
+    }   
+
     render() {
+        const { posts, error, isLoading } = this.state
+
+        if (isLoading === true) {
+            return <p className="loading">Loading</p>
+        }
+
+        if (error) {
+            return <p>{error}</p>
+        }
+
         return (
-            <React.Fragment>
-                <PostList/>
-            </React.Fragment>
+            <PostList posts={posts} />
         )
     }
 }
