@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropType from 'prop-types'
 
 export default function Post({ link, time, title, user, comments }) {
     return (
@@ -14,4 +15,12 @@ export default function Post({ link, time, title, user, comments }) {
             </div>
         </div>
     )
+}
+
+Post.propTypes = {
+    link : PropType.string.isRequired,
+    time : PropType.number.isRequired,
+    title : PropType.string.isRequired,
+    user : PropType.string.isRequired,
+    comments : PropType.number.isRequired
 }

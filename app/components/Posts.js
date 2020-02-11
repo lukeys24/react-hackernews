@@ -1,6 +1,7 @@
 import React from 'react'
 import PostList from './PostList'
 import { getPosts } from '../utils/api'
+import Loading from './Loading'
 
 export default class Posts extends React.Component {
     constructor(props) {
@@ -53,7 +54,7 @@ export default class Posts extends React.Component {
         const { posts, error, isLoading } = this.state
 
         if (isLoading === true) {
-            return <p className="loading">Loading</p>
+            return <Loading/>
         }
 
         if (error) {

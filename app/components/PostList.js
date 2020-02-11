@@ -1,7 +1,6 @@
 import React from 'react'
 import Post from './Post'
 import PropType from 'prop-types'
-import { fetchComments } from '../utils/api'
 
 export default function PostList({ posts }) {
     return (

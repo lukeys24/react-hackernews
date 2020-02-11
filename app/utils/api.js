@@ -11,7 +11,11 @@ export function getPosts(type) {
             return ids.slice(0, 50);
         })
         .then((ids) => Promise.all(ids.map(fetchItem)))
-        .then((posts) => removeDeleted(onlyPosts(removeDead(posts))))
+        .then((posts) => removeNoUrl(removeDeleted(onlyPosts(removeDead(posts)))))
+}
+
+function removeNoUrl (posts) {
+    return posts.filter(( post ) => post.hasOwnProperty('url'))
 }
 
 function removeDead (posts) {
