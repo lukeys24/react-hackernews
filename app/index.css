@@ -40,6 +40,13 @@ li {
     color: rgb(187, 46, 31);
 }
 
+.post-link {
+    text-decoration: none;
+    font-size: 32px;
+    font-weight: bold;
+    color: rgb(187, 46, 31);
+}
+
 .nav-link {
     text-decoration: none;
     color: inherit;
@@ -74,4 +81,11 @@ span {
 
 .name-title { 
     margin-bottom: 0px;
+}
+
+.comment-container {
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: lightgray;
 }

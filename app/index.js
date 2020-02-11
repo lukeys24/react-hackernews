@@ -5,6 +5,7 @@ import './index.css'
 import Nav from './components/Nav'
 import Posts from './components/Posts'
 import User from './components/User'
+import Post from './components/Post'
 
 class App extends React.Component {
 
@@ -26,6 +27,7 @@ class App extends React.Component {
                             render={() => <Posts type="new"/>}
                         />
                         <Route path="/user" component={User}/>
+                        <Route path="/post" component={Post}/>
                     </Switch>
                 </div>
             </Router>

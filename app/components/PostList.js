@@ -1,5 +1,5 @@
 import React from 'react'
-import Post from './Post'
+import PostInfo from './PostInfo'
 import PropType from 'prop-types'
 
 export default function PostList({ posts }) {
@@ -7,14 +7,12 @@ export default function PostList({ posts }) {
         <ul>
             {posts.map((post) => {
                 return (
-                    <Post
-                        key={post.id}
-                        link={post.url}
-                        time={post.time}
-                        title={post.title}
-                        user={post.by}
-                        comments={post.descendants}
-                    />
+                    <div key={post.id} className="post">
+                        <a className="link" href={post.url}>
+                            {post.title}
+                        </a>
+                        <PostInfo user={post.by} time={post.time} id={post.id} comments={post.descendants}/>
+                    </div>
                 )
             })}
         </ul>

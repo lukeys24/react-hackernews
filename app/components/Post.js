@@ -1,27 +1,72 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import PropType from 'prop-types'
-import { formatDate } from '../utils//helper'
+import { fetchItem, fetchComments } from '../utils/api'
+import queryString from 'query-string'
+import Loading from './Loading'
+import PostInfo from './PostInfo'
+import Comment from './Comment'
 
-export default function Post({ link, time, title, user, comments }) {
-    return (
-        <div className="post">
-            <a className="link" href={link}>
-                {title}
-            </a>
-            <div className="info">
-                <span>by <Link to={{pathname: "/user", search: `?id=${user}`}} className="info-link">{user}</Link></span>
-                <span>on {formatDate(time)}</span>
-                <span>with <Link to="/" className="info-link">{comments}</Link> comments</span>
-            </div>
-        </div>
-    )
+export default class Post extends React.Component {
+    constructor (props) {
+        super(props)
+
+        this.state =  {
+            post : null,
+            loadingPost : true,
+            comments: null,
+            loadingComments: true,
+            error : null
+        }
+    }
+
+    componentDidMount() {
+        const { id } = queryString.parse(this.props.location.search)
+
+        fetchItem(id)
+            .then((post) => {
+                this.setState({ post, loadingPost: false })
+                
+                return fetchComments(post.kids)
+            })
+            .then((comments) => {
+                this.setState({ comments, loadingComments : false })
+            })
+    }
+
+    render() {
+        const { error, comments ,loadingComments ,loadingPost, post } = this.state
+
+        if (error) {
+            return <p>{error}</p>
+        }
+
+        return (
+            <React.Fragment>
+                { loadingPost === true 
+                    ?   <Loading text="Fetching Post"/>
+                    : 
+                        <React.Fragment>
+                             <a className="post-link" href={post.url}>
+                                {post.title}
+                            </a>
+                            <PostInfo user={post.by} time={post.time} id={post.id} comments={post.descendants}/>
+                        </React.Fragment>
+                }
+
+                { loadingComments === true
+                    ?   <Loading text="Fetching Comments"/>
+                    :   
+                        <React.Fragment>
+                            {
+                                comments.map((comment) => {
+                                    return (
+                                        <Comment key={comment.id} comment={comment}/>
+                                    )
+                                })
+                            }
+                        </React.Fragment>
+                }
+            </React.Fragment>
+        )
+    }
 }
 
-Post.propTypes = {
-    link : PropType.string.isRequired,
-    time : PropType.number.isRequired,
-    title : PropType.string.isRequired,
-    user : PropType.string.isRequired,
-    comments : PropType.number.isRequired
-}
