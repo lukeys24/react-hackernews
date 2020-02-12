@@ -2,16 +2,21 @@ import React from 'react'
 import PropType from 'prop-types'
 import { Link } from 'react-router-dom'
 import { formatDate } from '../utils/helper'
+import { ThemeConsumer } from '../contexts/theme'
 
 export default function PostInfo({ user, time, id, comments }) {
     return (
-        <div className="info">
-            <span>by <Link to={{pathname: "/user", search: `?id=${user}`}} className="info-link">{user}</Link></span>
-            <span>on {formatDate(time)}</span>
-            {comments >= 0 && 
-                <span>with <Link to={{pathname: "/post", search: `?id=${id}`}} className="info-link">{comments}</Link> comments</span>     
-            }
-        </div>
+        <ThemeConsumer>
+            {({ theme }) => (
+                <div className="info">
+                    <span>by <Link className={`info-link ${theme}-text`} to={{pathname: "/user", search: `?id=${user}`}}>{user}</Link></span>
+                    <span>on {formatDate(time)}</span>
+                    {comments >= 0 && 
+                        <span>with <Link className={`info-link ${theme}-text`} to={{pathname: "/post", search: `?id=${id}`}}>{comments}</Link> comments</span>     
+                    }
+                </div>
+            )}
+        </ThemeConsumer>
     )
 }
 

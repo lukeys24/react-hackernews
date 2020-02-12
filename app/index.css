@@ -26,7 +26,6 @@ li {
 .row {
     display: flex;
     flex-direction: row;
-    padding: 0px;
 }
 
 .row li {
@@ -88,4 +87,31 @@ span {
     padding: 10px;
     border-radius: 5px;
     background-color: lightgray;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.btn-clear {
+    border: none;
+    background: transparent;
+}
+
+.dark {
+    color: #DADADA;
+    background: #1C2022;
+    min-height: 100%;
+}
+
+.dark-text {
+    color: lightgray;
+}
+
+.dark-comment-container {
+    background-color: rgba(128, 128, 128, 0.1411764705882353);
+}
+
+.dark-comment-container a {
+    color: lightgray;
 }

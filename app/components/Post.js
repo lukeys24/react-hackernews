@@ -4,6 +4,7 @@ import queryString from 'query-string'
 import Loading from './Loading'
 import PostInfo from './PostInfo'
 import Comment from './Comment'
+import { ThemeConsumer } from '../contexts/theme'
 
 export default class Post extends React.Component {
     constructor (props) {
@@ -43,32 +44,36 @@ export default class Post extends React.Component {
         }
 
         return (
-            <React.Fragment>
-                { loadingPost === true 
-                    ?   <Loading text="Fetching Post"/>
-                    : 
-                        <React.Fragment>
-                             <a className="post-link" href={post.url}>
-                                {post.title}
-                            </a>
-                            <PostInfo user={post.by} time={post.time} id={post.id} comments={post.descendants}/>
-                        </React.Fragment>
-                }
+            <ThemeConsumer>
+                {({ theme }) => (
+                    <div>
+                        { loadingPost === true 
+                            ?   <Loading text="Fetching Post"/>
+                            : 
+                                <React.Fragment>
+                                    <a className={`post-link ${theme}-text`} href={post.url}>
+                                        {post.title}
+                                    </a>
+                                    <PostInfo user={post.by} time={post.time} id={post.id} comments={post.descendants}/>
+                                </React.Fragment>
+                        }
 
-                { loadingComments === true
-                    ?   <Loading text="Fetching Comments"/>
-                    :   
-                        <React.Fragment>
-                            {
-                                comments.map((comment) => {
-                                    return (
-                                        <Comment key={comment.id} comment={comment}/>
-                                    )
-                                })
-                            }
-                        </React.Fragment>
-                }
-            </React.Fragment>
+                        { loadingComments === true
+                            ?   <Loading text="Fetching Comments"/>
+                            :   
+                                <React.Fragment>
+                                    {
+                                        comments.map((comment) => {
+                                            return (
+                                                <Comment key={comment.id} comment={comment}/>
+                                            )
+                                        })
+                                    }
+                                </React.Fragment>
+                        }
+                    </div>
+                )}
+            </ThemeConsumer>
         )
     }
 }

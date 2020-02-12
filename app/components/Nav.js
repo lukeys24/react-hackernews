@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { ThemeConsumer } from '../contexts/theme'
 
 const activeStyle = {
     color: "rgb(187, 46, 31)"
@@ -7,30 +8,42 @@ const activeStyle = {
 
 export default function Nav() {
     return (
-        <nav>
-            <ul className="row">
-                <li>
-                    <NavLink
-                        exact
-                        className="nav-link"
-                        to="/"
-                        activeStyle={activeStyle}
-                    >
-                        Top
-                    </NavLink>
-                </li>
+        <ThemeConsumer>
+            {({ theme, toggleTheme}) => (
+                <nav className='row space-between'>
+                    <ul className="row">
+                        <li>
+                            <NavLink
+                                exact
+                                className="nav-link"
+                                to="/"
+                                activeStyle={activeStyle}
+                            >
+                                Top
+                            </NavLink>
+                        </li>
 
-                <li>
-                    <NavLink
-                        exact
-                        className="nav-link"
-                        to="new"
-                        activeStyle={activeStyle}
+                        <li>
+                            <NavLink
+                                exact
+                                className="nav-link"
+                                to="new"
+                                activeStyle={activeStyle}
+                            >
+                                New
+                            </NavLink>
+                        </li>
+                    </ul>
+
+                    <button
+                        style={{fontSize: 30}}
+                        className='btn-clear'
+                        onClick={toggleTheme}
                     >
-                        New
-                    </NavLink>
-                </li>
-            </ul>
-        </nav>
+                        {theme === 'light' ? '🔦' : '💡'}
+                    </button>
+                </nav>
+            )}
+        </ThemeConsumer>
     )
 }
